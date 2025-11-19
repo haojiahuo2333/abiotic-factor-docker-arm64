@@ -1,0 +1,35 @@
+services:
+  abiotic-factor:
+    build:
+      context: .
+      dockerfile: ARM64.Dockerfile
+    container_name: abiotic-factor
+    restart: unless-stopped
+
+    environment:
+      # 服务器展示信息
+      AF_SERVER_NAME: "My Abiotic Server"
+      AF_SERVER_PASSWORD: "MyPassword" # 为空则无密码
+      AF_WORLD_NAME: "Cascade"           # 存档文件夹名
+      AF_MAX_PLAYERS: "6"
+
+      # 端口和存档间隔（秒）
+      AF_GAME_PORT: "7777"
+      AF_QUERY_PORT: "27015"
+      AF_SAVE_INTERVAL: "300"
+
+    # 端口映射：官方推荐 UDP 7777 / 27015
+    ports:
+      - "7777:7777/udp"
+      - "27015:27015/udp"
+      - "7777:7777/tcp"
+      - "27015:27015/tcp"
+    
+    # network_mode: host
+
+    volumes:
+      # 整个 dedicated server 安装目录
+      - ./data/abiotic/server:/abiotic/server
+      # 可选：单独挂世界存档目录（方便备份）
+      # - ./data/abiotic/worlds:/abiotic/server/AbioticFactor/Saved/SaveGames/Server/Worlds
+
