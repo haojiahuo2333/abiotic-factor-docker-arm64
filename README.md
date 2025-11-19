@@ -170,7 +170,6 @@ You can use **frp** (fast reverse proxy) with a public cloud server to expose yo
   - UDP 7777 (game)
   - UDP 27015 (query)
 - Players connect to **cloud server's public IP:7777**
-- Session short code / full multiplayer functionality works as if the server was directly on the internet
 
 #### Example `frps.ini` (on cloud server)
 
